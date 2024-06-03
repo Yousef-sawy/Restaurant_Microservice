@@ -6,7 +6,7 @@ import { Order } from './order.model';
 export class OrderController {
     constructor(private readonly orderService: OrderService) { }
 
-    @Post()
+    @Post('createOrder')
     async create(@Body() createOrderDto: Order): Promise<Order> {
         return this.orderService.create(createOrderDto);
     }
@@ -21,12 +21,12 @@ export class OrderController {
         return this.orderService.findOne(id);
     }
 
-    @Put(':id')
+    @Put('updateOrder/:id')
     async update(@Param('id') id: string, @Body() updateOrderDto: Order): Promise<Order> {
         return this.orderService.update(id, updateOrderDto);
     }
 
-    @Delete(':id')
+    @Delete('deleteOrder/:id')
     async remove(@Param('id') id: string): Promise<any> {
         return this.orderService.delete(id);
     }

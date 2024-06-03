@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common'
 import { UserTypeService } from './user-type.service';
 import { UserType } from './user-type.model';
 
-@Controller('user-type')
+@Controller('userTypes')
 export class UserTypeController {
   constructor(private readonly userTypeService: UserTypeService) {}
 

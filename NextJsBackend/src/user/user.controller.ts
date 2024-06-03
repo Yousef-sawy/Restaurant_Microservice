@@ -2,11 +2,11 @@ import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common'
 import { UserService } from './user.service';
 import { User } from './user.model';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('createUser')
   async create(@Body() createUserDto: User): Promise<User> {
     return this.userService.create(createUserDto);
   }
@@ -21,12 +21,12 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
-  @Put(':id')
+  @Put('updateUser/:id')
   async update(@Param('id') id: string, @Body() updateUserDto: User): Promise<User> {
     return this.userService.update(id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete('deleteUser/:id')
   async remove(@Param('id') id: string): Promise<any> {
     return this.userService.delete(id);
   }

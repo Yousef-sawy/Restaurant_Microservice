@@ -36,6 +36,10 @@ function UserTypePage() {
             if (formData._id) {
                 response = await axios.put(`http://localhost:8000/userTypes/${formData._id}`, formData);
             } else {
+                // Remove _id from formData if it's empty or null
+                if (!formData._id) {
+                    delete formData._id;
+                }
                 response = await axios.post('http://localhost:8000/userTypes', formData);
             }
 
@@ -54,6 +58,7 @@ function UserTypePage() {
         }
     };
 
+
     const handleDelete = async (userTypeId) => {
         try {
             await axios.delete(`http://localhost:8000/userTypes/${userTypeId}`);
@@ -70,6 +75,7 @@ function UserTypePage() {
             type_name: userType.type_name
         });
     };
+
 
     return (
         <div className="container mt-5">

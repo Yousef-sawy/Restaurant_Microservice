@@ -28,9 +28,9 @@ import { UserType } from './user-type.model';
 export declare class UserTypeService {
     private readonly userTypeModel;
     constructor(userTypeModel: Model<UserType>);
-    create(userType: UserType): Promise<UserType>;
+    create(createUserTypeDto: UserType): Promise<UserType>;
     findAll(): Promise<UserType[]>;
     findOne(id: string): Promise<UserType>;
-    update(id: string, userType: UserType): Promise<UserType>;
+    update(id: string, updateUserTypeDto: UserType): Promise<UserType>;
     delete(id: string): Promise<any>;
 }

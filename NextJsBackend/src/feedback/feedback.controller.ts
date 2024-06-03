@@ -6,7 +6,7 @@ import { Feedback } from './feedback.model';
 export class FeedbackController {
     constructor(private readonly feedbackService: FeedbackService) { }
 
-    @Post()
+    @Post('createFeedback')
     async create(@Body() createFeedbackDto: Feedback): Promise<Feedback> {
         return this.feedbackService.create(createFeedbackDto);
     }
@@ -21,12 +21,12 @@ export class FeedbackController {
         return this.feedbackService.findOne(id);
     }
 
-    @Put(':id')
+    @Put('updateFeedback/:id')
     async update(@Param('id') id: string, @Body() updateFeedbackDto: Feedback): Promise<Feedback> {
         return this.feedbackService.update(id, updateFeedbackDto);
     }
 
-    @Delete(':id')
+    @Delete('deleteFeedback/:id')
     async remove(@Param('id') id: string): Promise<any> {
         return this.feedbackService.delete(id);
     }
