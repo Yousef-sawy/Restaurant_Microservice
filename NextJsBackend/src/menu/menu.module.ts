@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MenuController } from './menu.controller';
 import { MenuService } from './menu.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MenuSchema,MenuModel } from './menu.model'; // Import the schema
+import { MenuSchema, MenuModel} from './menu.model'; // Import the schema
 
 
 
