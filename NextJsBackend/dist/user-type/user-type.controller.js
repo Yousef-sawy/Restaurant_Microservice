@@ -72,7 +72,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserTypeController.prototype, "remove", null);
 exports.UserTypeController = UserTypeController = __decorate([
-    (0, common_1.Controller)('user-type'),
+    (0, common_1.Controller)('userTypes'),
     __metadata("design:paramtypes", [user_type_service_1.UserTypeService])
 ], UserTypeController);
 //# sourceMappingURL=user-type.controller.js.map

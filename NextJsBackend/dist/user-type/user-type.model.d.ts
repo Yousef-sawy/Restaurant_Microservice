@@ -23,23 +23,16 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Schema, Document } from 'mongoose';
+import { Schema, Document, Types } from 'mongoose';
 export interface UserType extends Document {
-    readonly user_type_id: Schema.Types.ObjectId;
-    readonly type_name: string;
+    user_type_id: Types.ObjectId;
+    type_name: string;
 }
-export declare const UserTypeSchema: Schema<any, import("mongoose").Model<any, any, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, {
-    type_name: string;
-    user_type_id?: import("mongoose").Types.ObjectId;
-}, Document<unknown, {}, import("mongoose").FlatRecord<{
-    type_name: string;
-    user_type_id?: import("mongoose").Types.ObjectId;
-}>> & import("mongoose").FlatRecord<{
-    type_name: string;
-    user_type_id?: import("mongoose").Types.ObjectId;
-}> & {
-    _id: import("mongoose").Types.ObjectId;
-}>;
+export declare const UserTypeSchema: Schema<UserType, import("mongoose").Model<UserType, any, any, any, Document<unknown, any, UserType> & UserType & Required<{
+    _id: unknown;
+}>, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, UserType, Document<unknown, {}, import("mongoose").FlatRecord<UserType>> & import("mongoose").FlatRecord<UserType> & Required<{
+    _id: unknown;
+}>>;
 export declare const UserTypeModel: import("mongoose").Model<UserType, {}, {}, {}, Document<unknown, {}, UserType> & UserType & Required<{
     _id: unknown;
 }>, any>;
