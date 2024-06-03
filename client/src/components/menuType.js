@@ -38,10 +38,10 @@ function MenuPage() {
             if (formData._id) {
                 response = await axios.put(`http://localhost:8000/menu-type/updateMenuType/${formData._id}`, formData);
             } else {
-                response = await axios.post('http://localhost:8000/menu-type/createMenuType', formData);
+                const { _id, ...newFormData } = formData;
+                response = await axios.post('http://localhost:8000/menu-type/createMenuType', newFormData);
             }
-            console.log('Response:', response); // Log response
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 201) {
                 console.log("Menu type added/updated successfully");
                 window.alert("Menu type added/updated successfully");
                 setFormData({

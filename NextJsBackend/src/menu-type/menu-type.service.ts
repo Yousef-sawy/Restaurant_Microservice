@@ -8,6 +8,7 @@ export class MenuTypeService {
   constructor(@InjectModel('MenuType') private readonly menuTypeModel: Model<MenuType>) { }
 
   async create(createMenuTypeDto: MenuType): Promise<MenuType> {
+    console.log('Creating menuType:', createMenuTypeDto);
     const createdMenuType = new this.menuTypeModel(createMenuTypeDto);
     return await createdMenuType.save();
   }
