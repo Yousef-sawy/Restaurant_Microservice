@@ -21,4 +21,4 @@ export const MenuTypeSchema = new Schema({
   },
 });
 
-export const MenuTypeModel = model<MenuType>('MenuTypeSchema', MenuTypeSchema);
+export const MenuTypeModel = model<MenuType>('MenuType', MenuTypeSchema);
