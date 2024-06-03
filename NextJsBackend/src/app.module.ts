@@ -7,6 +7,7 @@ import { UserTypeModule } from './user-type/user-type.module';
 import * as dotenv from 'dotenv'; // Import dotenv
 import { FeedbackModule } from './feedback/feedback.module';
 import { CustomerModule } from './customer/customer.module';
+import { OrderModule } from './order/order.module';
 
 dotenv.config();
 @Module({
@@ -16,6 +17,7 @@ dotenv.config();
     UserTypeModule,
     CustomerModule,
     FeedbackModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
