@@ -47,13 +47,15 @@ function FeedbackPage() {
             if (formData._id) {
                 response = await axios.put(`http://localhost:8000/feedback/updateFeedback/${formData._id}`, formData);
             } else {
-                response = await axios.post('http://localhost:8000/feedback/createFeedback', formData);
+                const { _id, ...newFormData } = formData; // Rename formData to newFormData
+                response = await axios.post('http://localhost:8000/feedback', newFormData); // Use newFormData
             }
 
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 201) {
                 console.log("Feedback added/updated successfully");
                 window.alert("Feedback added/updated successfully");
 
+                // Clear the form data
                 setFormData({
                     _id: '',
                     customer_id: '',
@@ -68,7 +70,6 @@ function FeedbackPage() {
             window.alert("Error adding/updating feedback");
         }
     };
-
     const handleEdit = (feedbackItem) => {
         setFormData({
             _id: feedbackItem._id,

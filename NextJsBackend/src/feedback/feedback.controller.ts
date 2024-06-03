@@ -2,11 +2,11 @@ import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common'
 import { FeedbackService } from './feedback.service';
 import { Feedback } from './feedback.model';
 
-@Controller('feedback')
+@Controller('Feedback')
 export class FeedbackController {
     constructor(private readonly feedbackService: FeedbackService) { }
 
-    @Post('createFeedback')
+    @Post()
     async create(@Body() createFeedbackDto: Feedback): Promise<Feedback> {
         return this.feedbackService.create(createFeedbackDto);
     }

@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { OrderSchema, Order } from './order.model'; // Import the schema
-import { model } from 'mongoose';
+import { OrderSchema} from './order.model'; // Import the schema
+//import { model } from 'mongoose';
 
 @Module({
   imports: [
@@ -14,4 +14,4 @@ import { model } from 'mongoose';
 })
 export class OrderModule {}
 
-export const OrderModel = model<Order>('Order', OrderSchema);
+//export const OrderModel = model<Order>('Order', OrderSchema);

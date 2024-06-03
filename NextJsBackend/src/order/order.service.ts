@@ -8,6 +8,7 @@ export class OrderService {
     constructor(@InjectModel('Order') private readonly orderModel: Model<Order>) { }
 
     async create(order: Order): Promise<Order> {
+        console.log('Creating order:', order);
         const newOrder = new this.orderModel(order);
         return await newOrder.save();
     }

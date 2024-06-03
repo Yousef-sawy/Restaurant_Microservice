@@ -8,6 +8,7 @@ export class FeedbackService {
     constructor(@InjectModel('Feedback') private readonly feedbackModel: Model<Feedback>) {}
 
     async create(feedback: Feedback): Promise<Feedback> {
+        console.log('Creating feedback:', feedback); // Add this line for logging
         const newFeedback = new this.feedbackModel(feedback);
         return await newFeedback.save();
     }

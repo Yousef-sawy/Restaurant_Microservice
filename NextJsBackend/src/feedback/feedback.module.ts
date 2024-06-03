@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { FeedbackController } from './feedback.controller';
 import { FeedbackService } from './feedback.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { FeedbackSchema, Feedback } from './feedback.model'; // Import the schema
-import { model } from 'mongoose';
+import { FeedbackSchema} from './feedback.model'; // Import the schema
+//import { model } from 'mongoose';
 
 @Module({
   imports: [
@@ -14,4 +14,4 @@ import { model } from 'mongoose';
 })
 export class FeedbackModule {}
 
-export const FeedbackModel = model<Feedback>('Feedback', FeedbackSchema);
+//export const FeedbackModel = model<Feedback>('Feedback', FeedbackSchema);

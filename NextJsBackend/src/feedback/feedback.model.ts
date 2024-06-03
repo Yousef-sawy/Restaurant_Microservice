@@ -1,14 +1,14 @@
 import { Schema, Document, model } from 'mongoose';
 
 export interface Feedback extends Document {
-    readonly customer_id: Schema.Types.ObjectId;
+    readonly customer_id: string;
     readonly rating: number;
     readonly feedback: string;
 }
 
 export const FeedbackSchema = new Schema({
     customer_id: {
-        type: Schema.Types.ObjectId,
+        type: String, // Treat customer_id as a regular string
         required: true,
     },
     rating: {

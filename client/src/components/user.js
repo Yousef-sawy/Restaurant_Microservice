@@ -68,16 +68,20 @@ function UserPage() {
                 response = await axios.post('http://localhost:8000/users/createUser', formData);
             }
 
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 201) {
                 console.log("User added/updated successfully");
                 window.alert("User added/updated successfully");
+
+                // Clear the form data
                 setFormData({
+                    _id: '', // Reset _id field for new creations
                     username: '',
                     password: '',
                     user_type: '', // Reset user_type after form submission
                     national_id: '',
                     phone_no: ''
                 });
+
                 fetchUsers();
             }
         } catch (error) {

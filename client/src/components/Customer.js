@@ -21,7 +21,7 @@ function App() {
       })
       .catch(error => console.log(error));
   }, []);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -29,7 +29,7 @@ function App() {
       [name]: value
     });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -38,23 +38,23 @@ function App() {
         // If _id exists in formData, it means we're updating an existing customer
         response = await axios.put(`http://localhost:8000/customer/updateCustomer/${formData._id}`, formData);
       } else {
-        // Otherwise, we're creating a new customer
-        response = await axios.post('http://localhost:8000/customer/createCustomer', formData);
+        // Remove the _id field from formData before sending the request
+        const { _id, ...newCustomerData } = formData;
+        response = await axios.post('http://localhost:8000/customer', newCustomerData);
       }
-  
-      if (response.status === 200) {
+
+      if (response.status === 200 || response.status === 201) {
         console.log("Customer added/updated successfully");
         window.alert("Customer added/updated successfully");
-  
+
         // Clear the form data
         setFormData({
-          ...formData,
           _id: '', // Reset _id field for new creations
           customer_name: '',
           phone_number: '',
           email: ''
         });
-  
+
         // Optionally, you can update the state to reflect the newly added/updated customer
         if (formData._id) {
           const updatedRecords = records.map(record => {
@@ -79,7 +79,7 @@ function App() {
       window.alert("Error adding/updating customer");
     }
   };
-  
+
   const handleEdit = async (customerId) => {
     try {
       const response = await axios.get(`http://localhost:8000/customer/${customerId}`);
@@ -94,7 +94,7 @@ function App() {
       console.error('Error fetching customer details:', error);
     }
   };
-  
+
   const handleDelete = async (customerId) => {
     try {
       await axios.delete(`http://localhost:8000/customer/deleteCustomer/${customerId}`);
@@ -105,7 +105,7 @@ function App() {
       console.error('Error deleting customer:', error);
     }
   };
-  
+
 
   return (
     <div className="container mt-5">
