@@ -17,6 +17,8 @@ const dotenv = require("dotenv");
 const feedback_module_1 = require("./feedback/feedback.module");
 const customer_module_1 = require("./customer/customer.module");
 const order_module_1 = require("./order/order.module");
+const menu_module_1 = require("./menu/menu.module");
+const menu_type_module_1 = require("./menu-type/menu-type.module");
 dotenv.config();
 let AppModule = class AppModule {
 };
@@ -30,6 +32,8 @@ exports.AppModule = AppModule = __decorate([
             customer_module_1.CustomerModule,
             feedback_module_1.FeedbackModule,
             order_module_1.OrderModule,
+            menu_module_1.MenuModule,
+            menu_type_module_1.MenuTypeModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
