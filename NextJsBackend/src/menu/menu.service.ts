@@ -1,13 +1,14 @@
-import { Injectable,Inject } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Menu } from './menu.model';
 
 @Injectable()
 export class MenuService {
-    constructor(@Inject('MenuModel') private readonly menuModel: Model<Menu>) {}
+  constructor(@Inject('MenuModel') private readonly menuModel: Model<Menu>) { }
 
   async create(menu: Menu): Promise<Menu> {
+    console.log('Creating menu:', menu); // Add this line for logging
     const newMenu = new this.menuModel(menu);
     return await newMenu.save();
   }
