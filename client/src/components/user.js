@@ -21,27 +21,25 @@ function UserPage() {
         try {
             const response = await axios.get('http://localhost:8000/users');
             const usersData = response.data;
-            
+
             // Fetch user types to associate with users
             const userTypesResponse = await axios.get('http://localhost:8000/userTypes');
             const userTypes = userTypesResponse.data.reduce((acc, userType) => {
                 acc[userType._id] = userType;
                 return acc;
             }, {});
-    
+
             // Map user data to include user type
             const usersWithUserType = usersData.map(user => ({
                 ...user,
                 user_type: userTypes[user.user_type] || { type_name: 'N/A' } // Fallback to 'N/A' if user type not found
             }));
-            
+
             setUsers(usersWithUserType);
         } catch (error) {
             console.error('Error fetching users:', error);
         }
     };
-    
-    
 
     const fetchUserTypes = async () => {
         try {
@@ -65,9 +63,9 @@ function UserPage() {
         try {
             let response;
             if (formData._id) {
-                response = await axios.put(`http://localhost:8000/users/${formData._id}`, formData);
+                response = await axios.put(`http://localhost:8000/users/updateUser/${formData._id}`, formData);
             } else {
-                response = await axios.post('http://localhost:8000/users', formData);
+                response = await axios.post('http://localhost:8000/users/createUser', formData);
             }
 
             if (response.status === 200) {
@@ -90,14 +88,13 @@ function UserPage() {
 
     const handleDelete = async (userId) => {
         try {
-            await axios.delete(`http://localhost:8000/users/${userId}`);
+            await axios.delete(`http://localhost:8000/users/deleteUser/${userId}`);
             setUsers(prevUsers => prevUsers.filter(user => user._id !== userId));
             console.log("User deleted successfully");
         } catch (error) {
             console.error('Error deleting user:', error);
         }
     };
-
     const handleEdit = (user) => {
         setFormData({
             _id: user._id,

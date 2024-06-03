@@ -7,7 +7,7 @@ function FeedbackPage() {
         _id: '',
         customer_id: '',
         rating: '',
-        feedback: '' 
+        feedback: ''
     });
 
     useEffect(() => {
@@ -45,9 +45,9 @@ function FeedbackPage() {
         try {
             let response;
             if (formData._id) {
-                response = await axios.put(`http://localhost:8000/feedback/${formData._id}`, formData);
+                response = await axios.put(`http://localhost:8000/feedback/updateFeedback/${formData._id}`, formData);
             } else {
-                response = await axios.post('http://localhost:8000/feedback', formData);
+                response = await axios.post('http://localhost:8000/feedback/createFeedback', formData);
             }
 
             if (response.status === 200) {
@@ -80,13 +80,14 @@ function FeedbackPage() {
 
     const handleDelete = async (feedbackId) => {
         try {
-            await axios.delete(`http://localhost:8000/feedback/${feedbackId}`);
+            await axios.delete(`http://localhost:8000/feedback/deleteFeedback/${feedbackId}`);
             setFeedback(prevFeedback => prevFeedback.filter(item => item._id !== feedbackId));
             console.log("Feedback deleted successfully");
         } catch (error) {
             console.error('Error deleting feedback:', error);
         }
     };
+
 
     // Define the labels for each level of rating
     const ratingLabels = ["Bad", "Poor", "Average", "Good", "Excellent"];

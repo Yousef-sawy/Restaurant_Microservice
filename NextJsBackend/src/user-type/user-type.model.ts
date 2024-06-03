@@ -1,16 +1,16 @@
-import { Schema, Document, model } from 'mongoose';
+import { Schema, Document, model, Types } from 'mongoose';
 
 // Define the UserType interface
 export interface UserType extends Document {
-  readonly user_type_id: Schema.Types.ObjectId;
-  readonly type_name: string;
+  user_type_id: Types.ObjectId;  // This field will use Mongoose's ObjectId type
+  type_name: string;
 }
 
 // Define the UserType schema
-export const UserTypeSchema = new Schema({
+export const UserTypeSchema = new Schema<UserType>({
   user_type_id: {
     type: Schema.Types.ObjectId,
-    auto: true,
+    default: () => new Types.ObjectId(),  // Automatically generate ObjectId
   },
   type_name: {
     type: String,

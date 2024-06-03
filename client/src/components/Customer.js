@@ -73,7 +73,6 @@ function App() {
       window.alert("Error adding/updating customer");
     }
   };
-  
 
   const handleEdit = async (customerId) => {
     try {

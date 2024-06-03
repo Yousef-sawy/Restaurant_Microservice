@@ -20,6 +20,7 @@ let UserTypeController = class UserTypeController {
         this.userTypeService = userTypeService;
     }
     async create(createUserTypeDto) {
+        console.log('Received DTO:', createUserTypeDto);
         return this.userTypeService.create(createUserTypeDto);
     }
     async findAll() {
@@ -37,7 +38,7 @@ let UserTypeController = class UserTypeController {
 };
 exports.UserTypeController = UserTypeController;
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('createUserType'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -57,7 +58,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserTypeController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Put)(':id'),
+    (0, common_1.Put)('updateUserType/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -65,14 +66,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserTypeController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
+    (0, common_1.Delete)('deleteUserType/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserTypeController.prototype, "remove", null);
 exports.UserTypeController = UserTypeController = __decorate([
-    (0, common_1.Controller)('user-type'),
+    (0, common_1.Controller)('userTypes'),
     __metadata("design:paramtypes", [user_type_service_1.UserTypeService])
 ], UserTypeController);
 //# sourceMappingURL=user-type.controller.js.map
