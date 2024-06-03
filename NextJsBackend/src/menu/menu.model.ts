@@ -1,4 +1,4 @@
-import { Schema,Document,model } from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 
 export interface Menu extends Document {
   readonly dish_name: string;
