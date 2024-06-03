@@ -14,6 +14,9 @@ const mongoose_1 = require("@nestjs/mongoose");
 const user_module_1 = require("./user/user.module");
 const user_type_module_1 = require("./user-type/user-type.module");
 const dotenv = require("dotenv");
+const feedback_module_1 = require("./feedback/feedback.module");
+const customer_module_1 = require("./customer/customer.module");
+const order_module_1 = require("./order/order.module");
 dotenv.config();
 let AppModule = class AppModule {
 };
@@ -24,6 +27,9 @@ exports.AppModule = AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot(process.env.MONGODB_URL),
             user_module_1.UserModule,
             user_type_module_1.UserTypeModule,
+            customer_module_1.CustomerModule,
+            feedback_module_1.FeedbackModule,
+            order_module_1.OrderModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
