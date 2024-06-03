@@ -21,7 +21,7 @@ function App() {
       })
       .catch(error => console.log(error));
   }, []);
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -29,7 +29,7 @@ function App() {
       [name]: value
     });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -48,7 +48,8 @@ function App() {
   
         // Clear the form data
         setFormData({
-          _id: '', // Reset _id field
+          ...formData,
+          _id: '', // Reset _id field for new creations
           customer_name: '',
           phone_number: '',
           email: ''
@@ -66,6 +67,11 @@ function App() {
         } else {
           // If it's a new customer, you may want to refresh the list of customers
           // or retrieve the updated list from the server
+          axios.get('http://localhost:8000/customer')
+            .then(res => {
+              setRecords(res.data);
+            })
+            .catch(error => console.log(error));
         }
       }
     } catch (error) {
@@ -73,7 +79,7 @@ function App() {
       window.alert("Error adding/updating customer");
     }
   };
-
+  
   const handleEdit = async (customerId) => {
     try {
       const response = await axios.get(`http://localhost:8000/customer/${customerId}`);
@@ -88,7 +94,7 @@ function App() {
       console.error('Error fetching customer details:', error);
     }
   };
-
+  
   const handleDelete = async (customerId) => {
     try {
       await axios.delete(`http://localhost:8000/customer/deleteCustomer/${customerId}`);
@@ -99,6 +105,7 @@ function App() {
       console.error('Error deleting customer:', error);
     }
   };
+  
 
   return (
     <div className="container mt-5">

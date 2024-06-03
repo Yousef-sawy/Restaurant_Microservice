@@ -5,7 +5,8 @@ import { MenuType } from './menu-type.model';
 @Controller('menu-type')
 export class MenuTypeController {
     constructor(private readonly menuTypeService: MenuTypeService) { }
-    @Post()
+
+    @Post('createMenuType')
     async create(@Body() createMenuTypeDto: MenuType): Promise<MenuType> {
         return this.menuTypeService.create(createMenuTypeDto);
     }
@@ -20,14 +21,13 @@ export class MenuTypeController {
         return this.menuTypeService.findOne(id);
     }
 
-    @Put(':id')
+    @Put('updateMenuType/:id')
     async update(@Param('id') id: string, @Body() updateMenuTypeDto: MenuType): Promise<MenuType> {
         return this.menuTypeService.update(id, updateMenuTypeDto);
     }
 
-    @Delete(':id')
+    @Delete('deleteMenuType/:id')
     async remove(@Param('id') id: string): Promise<any> {
         return this.menuTypeService.delete(id);
     }
-
 }

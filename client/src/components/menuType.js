@@ -16,7 +16,7 @@ function MenuPage() {
 
     const fetchMenus = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/menutype');
+            const response = await axios.get('http://localhost:8000/menu-type');
             setMenus(response.data);
         } catch (error) {
             console.error('Error fetching menus:', error);
@@ -36,9 +36,9 @@ function MenuPage() {
         try {
             let response;
             if (formData._id) {
-                response = await axios.put(`http://localhost:8000/menutype/updateMenuType/${formData._id}`, formData);
+                response = await axios.put(`http://localhost:8000/menu-type/updateMenuType/${formData._id}`, formData);
             } else {
-                response = await axios.post('http://localhost:8000/menutype/createMenuType', formData);
+                response = await axios.post('http://localhost:8000/menu-type/createMenuType', formData);
             }
             console.log('Response:', response); // Log response
             if (response.status === 200) {
@@ -60,7 +60,7 @@ function MenuPage() {
 
     const handleDelete = async (menuTypeId) => {
         try {
-            await axios.delete(`http://localhost:8000/menutype/deleteMenuType/${menuTypeId}`);
+            await axios.delete(`http://localhost:8000/menu-type/deleteMenuType/${menuTypeId}`);
             setMenus(prevMenus => prevMenus.filter(menu => menu._id !== menuTypeId));
             console.log("Menu type deleted successfully");
         } catch (error) {

@@ -1,15 +1,15 @@
-import { Injectable,Inject } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { MenuType } from './menu-type.model';
 
 @Injectable()
 export class MenuTypeService {
-    constructor(@Inject('MenuTypeModel') private readonly menuTypeModel: Model<MenuType>) {}
+  constructor(@InjectModel('MenuType') private readonly menuTypeModel: Model<MenuType>) { }
 
-  async create(menuType: MenuType): Promise<MenuType> {
-    const newMenuType = new this.menuTypeModel(menuType);
-    return await newMenuType.save();
+  async create(createMenuTypeDto: MenuType): Promise<MenuType> {
+    const createdMenuType = new this.menuTypeModel(createMenuTypeDto);
+    return await createdMenuType.save();
   }
 
   async findAll(): Promise<MenuType[]> {
@@ -20,11 +20,11 @@ export class MenuTypeService {
     return await this.menuTypeModel.findById(id).exec();
   }
 
-  async update(id: string, menuType: MenuType): Promise<MenuType> {
-    return await this.menuTypeModel.findByIdAndUpdate(id, menuType, { new: true }).exec();
+  async update(id: string, updateMenuTypeDto: MenuType): Promise<MenuType> {
+    return await this.menuTypeModel.findByIdAndUpdate(id, updateMenuTypeDto, { new: true }).exec();
   }
 
   async delete(id: string): Promise<any> {
-    return await this.menuTypeModel.deleteOne({ _id: id }).exec();
+    return await this.menuTypeModel.findByIdAndDelete(id).exec();
   }
 }
