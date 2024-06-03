@@ -11,6 +11,7 @@ import { OrderModule } from './order/order.module';
 
 
 
+
 dotenv.config();
 @Module({
   imports: [
@@ -20,9 +21,9 @@ dotenv.config();
     CustomerModule,
     FeedbackModule,
     OrderModule,
-    ],
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
 
-export class AppModule {}
+export class AppModule { }
