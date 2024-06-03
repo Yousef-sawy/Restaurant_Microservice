@@ -5,12 +5,17 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { UserTypeModule } from './user-type/user-type.module';
 import * as dotenv from 'dotenv'; // Import dotenv
+import { FeedbackModule } from './feedback/feedback.module';
+import { CustomerModule } from './customer/customer.module';
+
 dotenv.config();
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.MONGODB_URL),
     UserModule,
     UserTypeModule,
+    CustomerModule,
+    FeedbackModule,
   ],
   controllers: [AppController],
   providers: [AppService],
