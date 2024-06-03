@@ -6,9 +6,8 @@ import { UserType } from './user-type.model';
 export class UserTypeController {
   constructor(private readonly userTypeService: UserTypeService) {}
 
-  @Post('createUserType')
+  @Post()
   async create(@Body() createUserTypeDto: UserType): Promise<UserType> {
-    console.log('Received DTO:', createUserTypeDto);  // Add this line
     return this.userTypeService.create(createUserTypeDto);
   }
 
@@ -22,12 +21,12 @@ export class UserTypeController {
     return this.userTypeService.findOne(id);
   }
 
-  @Put('updateUserType/:id')
+  @Put(':id')
   async update(@Param('id') id: string, @Body() updateUserTypeDto: UserType): Promise<UserType> {
     return this.userTypeService.update(id, updateUserTypeDto);
   }
 
-  @Delete('deleteUserType/:id')
+  @Delete(':id')
   async remove(@Param('id') id: string): Promise<any> {
     return this.userTypeService.delete(id);
   }

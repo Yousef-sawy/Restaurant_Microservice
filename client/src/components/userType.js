@@ -34,9 +34,13 @@ function UserTypePage() {
         try {
             let response;
             if (formData._id) {
-                response = await axios.put(`http://localhost:8000/userTypes/updateUserType/${formData._id}`, formData);
+                response = await axios.put(`http://localhost:8000/userTypes/${formData._id}`, formData);
             } else {
-                response = await axios.post('http://localhost:8000/userTypes/createUserType', formData);
+                // Remove _id from formData if it's empty or null
+                if (!formData._id) {
+                    delete formData._id;
+                }
+                response = await axios.post('http://localhost:8000/userTypes', formData);
             }
 
             if (response.status === 201 || response.status === 200) {
@@ -54,9 +58,10 @@ function UserTypePage() {
         }
     };
 
+
     const handleDelete = async (userTypeId) => {
         try {
-            await axios.delete(`http://localhost:8000/userTypes/deleteUserType/${userTypeId}`);
+            await axios.delete(`http://localhost:8000/userTypes/${userTypeId}`);
             setUserTypes(prevUserTypes => prevUserTypes.filter(userType => userType._id !== userTypeId));
             console.log("User type deleted successfully");
         } catch (error) {
@@ -70,6 +75,7 @@ function UserTypePage() {
             type_name: userType.type_name
         });
     };
+
 
     return (
         <div className="container mt-5">
