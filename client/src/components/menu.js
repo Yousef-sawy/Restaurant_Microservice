@@ -50,23 +50,26 @@ function MenuPage() {
         try {
             let response;
             if (formData._id) {
-                response = await axios.put(`http://localhost:8000/menu/updateMenu/${formData._id}`, { id: formData._id, ...formData });
+                response = await axios.put(`http://localhost:8000/menu/updateMenu/${formData._id}`, formData);
             } else {
-                const { _id, ...newformData } = formData;
-                response = await axios.post('http://localhost:8000/menu', newformData);
+                const { _id, ...newFormData } = formData;
+                response = await axios.post('http://localhost:8000/menu', newFormData);
             }
-            console.log('Response:', response); // Log response
-            if (response.status === 200) {
+
+            if (response.status === 200 || response.status === 201) {
                 console.log("Menu added/updated successfully");
                 window.alert("Menu added/updated successfully");
+
+                // Clear the form data
                 setFormData({
                     _id: '',
                     dish_name: '',
                     dish_description: '',
                     dish_price: '',
-                    diet_type: '' // Reset all form fields after submission
+                    diet_type: ''
                 });
-                fetchMenus();
+
+                fetchMenus(); // Refresh the list of menus
             }
         } catch (error) {
             console.error('Error adding/updating menu:', error);
