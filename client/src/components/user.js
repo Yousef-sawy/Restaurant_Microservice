@@ -95,8 +95,10 @@ function UserPage() {
             await axios.delete(`http://localhost:8000/users/deleteUser/${userId}`);
             setUsers(prevUsers => prevUsers.filter(user => user._id !== userId));
             console.log("User deleted successfully");
+            window.alert("Customer deleted successfully");
         } catch (error) {
             console.error('Error deleting user:', error);
+            window.alert("Error deleting user");
         }
     };
     const handleEdit = (user) => {

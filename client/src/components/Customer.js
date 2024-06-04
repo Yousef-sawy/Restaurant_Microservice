@@ -5,7 +5,7 @@ function App() {
   const [columns, setColumns] = useState([]);
   const [records, setRecords] = useState([]);
   const [formData, setFormData] = useState({
-    _id: '', // Add _id field for identifying the edited record
+    _id: '',
     customer_name: '',
     phone_number: '',
     email: ''
@@ -14,8 +14,8 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:8000/customer')
       .then(res => {
-        // Exclude the __v field from the columns
-        const filteredColumns = Object.keys(res.data[0]).filter(column => column !== '__v');
+        // Exclude the _id and __v fields from the columns
+        const filteredColumns = Object.keys(res.data[0]).filter(column => column !== '__v' && column !== '_id');
         setColumns(filteredColumns);
         setRecords(res.data);
       })
@@ -35,10 +35,8 @@ function App() {
     try {
       let response;
       if (formData._id) {
-        // If _id exists in formData, it means we're updating an existing customer
         response = await axios.put(`http://localhost:8000/customer/updateCustomer/${formData._id}`, formData);
       } else {
-        // Remove the _id field from formData before sending the request
         const { _id, ...newCustomerData } = formData;
         response = await axios.post('http://localhost:8000/customer', newCustomerData);
       }
@@ -47,26 +45,22 @@ function App() {
         console.log("Customer added/updated successfully");
         window.alert("Customer added/updated successfully");
 
-        // Clear the form data
         setFormData({
-          _id: '', // Reset _id field for new creations
+          _id: '',
           customer_name: '',
           phone_number: '',
           email: ''
         });
 
-        // Optionally, you can update the state to reflect the newly added/updated customer
         if (formData._id) {
           const updatedRecords = records.map(record => {
             if (record._id === formData._id) {
-              return formData; // Use the updated form data if it matches the edited record
+              return { ...record, ...formData };
             }
             return record;
           });
           setRecords(updatedRecords);
         } else {
-          // If it's a new customer, you may want to refresh the list of customers
-          // or retrieve the updated list from the server
           axios.get('http://localhost:8000/customer')
             .then(res => {
               setRecords(res.data);
@@ -85,7 +79,7 @@ function App() {
       const response = await axios.get(`http://localhost:8000/customer/${customerId}`);
       const { _id, customer_name, phone_number, email } = response.data;
       setFormData({
-        _id, // Set the _id field for identifying the edited record
+        _id,
         customer_name,
         phone_number,
         email
@@ -98,14 +92,14 @@ function App() {
   const handleDelete = async (customerId) => {
     try {
       await axios.delete(`http://localhost:8000/customer/deleteCustomer/${customerId}`);
-      // Update the records state by filtering out the deleted record
       setRecords(prevRecords => prevRecords.filter(record => record._id !== customerId));
       console.log("Customer deleted successfully");
+      window.alert("Customer deleted successfully");
     } catch (error) {
       console.error('Error deleting customer:', error);
+      window.alert("Error deleting customer");
     }
   };
-
 
   return (
     <div className="container mt-5">

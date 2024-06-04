@@ -84,8 +84,10 @@ function FeedbackPage() {
             await axios.delete(`http://localhost:8000/feedback/deleteFeedback/${feedbackId}`);
             setFeedback(prevFeedback => prevFeedback.filter(item => item._id !== feedbackId));
             console.log("Feedback deleted successfully");
+            window.alert("Feedback deleted successfully");
         } catch (error) {
             console.error('Error deleting feedback:', error);
+            window.alert("Feedback deleted successfully");
         }
     };
 

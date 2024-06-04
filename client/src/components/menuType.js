@@ -63,8 +63,12 @@ function MenuPage() {
             await axios.delete(`http://localhost:8000/menu-type/deleteMenuType/${menuTypeId}`);
             setMenus(prevMenus => prevMenus.filter(menu => menu._id !== menuTypeId));
             console.log("Menu type deleted successfully");
+            window.alert("Feedback deleted successfully");
+
         } catch (error) {
             console.error('Error deleting menu type:', error);
+            window.alert("Feedback deleted successfully");
+
         }
     };
 

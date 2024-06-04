@@ -14,7 +14,7 @@ function OrderPage() {
     useEffect(() => {
         fetchOrders();
     }, []);
-    
+
     const fetchOrders = async () => {
         try {
             const response = await axios.get('http://localhost:8000/order');
@@ -23,7 +23,7 @@ function OrderPage() {
             console.error('Error fetching orders:', error);
         }
     };
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -31,7 +31,7 @@ function OrderPage() {
             [name]: value
         });
     };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -41,7 +41,7 @@ function OrderPage() {
             } else {
                 response = await axios.post('http://localhost:8000/order/createOrder', formData);
             }
-    
+
             if (response.status === 200) {
                 console.log("Order added/updated successfully");
                 window.alert("Order added/updated successfully");
@@ -59,17 +59,19 @@ function OrderPage() {
             window.alert("Error adding/updating order");
         }
     };
-    
+
     const handleDelete = async (orderId) => {
         try {
             await axios.delete(`http://localhost:8000/order/deleteOrder/${orderId}`);
             setOrders(prevOrders => prevOrders.filter(order => order._id !== orderId));
             console.log("Order deleted successfully");
+            window.alert("Order deleted successfully");
         } catch (error) {
             console.error('Error deleting order:', error);
+            window.alert("Error deleting order");
         }
     };
-    
+
     const handleEdit = (order) => {
         setFormData({
             _id: order._id,
@@ -80,7 +82,7 @@ function OrderPage() {
             orderType: order.orderType
         });
     };
-    
+
 
     return (
         <div className="container mt-5">
@@ -130,23 +132,23 @@ function OrderPage() {
                             </tr>
                         </thead>
                         <tbody>
-    {orders.map((order, index) => (
-        <tr key={index}>
-            <td>{order.customer_id}</td>
-            <td>{order.user_id}</td>
-            <td>{order.menu_id}</td>
-            <td>{order.order_date}</td>
-            <td>{order.total_amount}</td>
-            <td>{order.orderType}</td> {/* Added orderType field */}
-            <td>
-                <button className="btn btn-primary" onClick={() => handleEdit(order)}>Edit</button>
-            </td>
-            <td>
-                <button className="btn btn-danger" onClick={() => handleDelete(order._id)}>Delete</button>
-            </td>
-        </tr>
-    ))}
-</tbody>
+                            {orders.map((order, index) => (
+                                <tr key={index}>
+                                    <td>{order.customer_id}</td>
+                                    <td>{order.user_id}</td>
+                                    <td>{order.menu_id}</td>
+                                    <td>{order.order_date}</td>
+                                    <td>{order.total_amount}</td>
+                                    <td>{order.orderType}</td> {/* Added orderType field */}
+                                    <td>
+                                        <button className="btn btn-primary" onClick={() => handleEdit(order)}>Edit</button>
+                                    </td>
+                                    <td>
+                                        <button className="btn btn-danger" onClick={() => handleDelete(order._id)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
             </div>

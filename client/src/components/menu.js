@@ -30,7 +30,7 @@ function MenuPage() {
 
     const fetchMenuTypes = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/menutype');
+            const response = await axios.get('http://localhost:8000/menu-type');
             setMenuTypes(response.data);
         } catch (error) {
             console.error('Error fetching menu types:', error);
@@ -52,7 +52,8 @@ function MenuPage() {
             if (formData._id) {
                 response = await axios.put(`http://localhost:8000/menu/updateMenu/${formData._id}`, { id: formData._id, ...formData });
             } else {
-                response = await axios.post('http://localhost:8000/menu/createMenu', formData);
+                const { _id, ...newformData } = formData;
+                response = await axios.post('http://localhost:8000/menu', newformData);
             }
             console.log('Response:', response); // Log response
             if (response.status === 200) {
@@ -63,7 +64,7 @@ function MenuPage() {
                     dish_name: '',
                     dish_description: '',
                     dish_price: '',
-                    diet_type: '' // Reset diet_type after submission
+                    diet_type: '' // Reset all form fields after submission
                 });
                 fetchMenus();
             }
